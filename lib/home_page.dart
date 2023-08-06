@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -9,16 +8,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController searchController=TextEditingController();
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title:Text('Recipy APP', style: TextStyle( fontWeight: FontWeight.bold, fontSize: 30, color: Colors.orange),)
-
-      ),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          title: Text(
+            'Recipy APP',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: Colors.orange),
+          )),
       body: Stack(
         children: [
           Container(
@@ -30,23 +33,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Column(
             children: [
-              Padding(padding: EdgeInsets.symmetric(horizontal: 8),
-              child: TextFormField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  
-                ),
-              ),
-
-
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: TextFormField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      hintText: 'Search for recipy',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      )),
+                )
               ),
             ],
-
           ),
-
         ],
       ),
     );
   }
 }
-
