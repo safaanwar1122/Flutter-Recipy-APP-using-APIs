@@ -9,7 +9,7 @@ import '../Model.dart';
 
 import 'package:http/http.dart' as http;
 class RecipyServices {
-  Future<RecipyModel> getRecipy(String recipy)async{
+  Future<RecipyModel> getRecipy()async{
     final response=await http.get(Uri.parse(AppUrl.baseUrl));
     if(response.statusCode==200)
       {
