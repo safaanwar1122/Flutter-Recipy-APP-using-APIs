@@ -19,11 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    myRecipy=recipyServices.getRecipy();
+    myRecipy = recipyServices.getRecipy();
   }
+
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
           Container(
@@ -62,8 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textInputAction: TextInputAction.search,
                           controller: searchController,
                           onChanged: (value) {
-                            recipyServices
-                                .getRecipy();
+                            recipyServices.getRecipy();
                           },
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -77,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,73 +95,95 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Expanded(child:
-              FutureBuilder <RecipyModel>(future:myRecipy ,
-              builder: (context,snapshot){
-                if(!snapshot.hasData){
-                  return CircularProgressIndicator();
-                }
-                else {
-                  return  ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data!.hits!.length,
-                      itemBuilder: (context,index){
-                        return InkWell(
-                          onTap: (){
+              Expanded(
+                  child: FutureBuilder<RecipyModel>(
+                future: myRecipy,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return CircularProgressIndicator();
+                  } else {
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        // physics: NeverScrollableScrollPhysics(),
+                        itemCount: snapshot.data!.hits!.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
 
-                          },
-                          child: Card(
-                            margin: EdgeInsets.all(10),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:BorderRadius.circular(10.6)
-                            ),
-                            elevation: 0.0,
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(snapshot.data!.hits![index].recipe!.image.toString(),
-                                  fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: 200,
+                            },
+                            child: Card(
+                              margin: EdgeInsets.all(10),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.6)),
+                              elevation: 0.0,
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      snapshot.data!.hits![index].recipe!.uri
+                                          .toString(),
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: 200,
+                                    ),
                                   ),
-
-                                  ),
-
+                                  /*
                                   Positioned(
                                     left: 0,
                                     right: 0,
                                     bottom: 0,
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
-                                        vertical: 5,horizontal: 10,
+                                        vertical: 5,
+                                        horizontal: 10,
                                       ),
                                       decoration: BoxDecoration(
                                         color: Colors.black54,
                                       ),
                                       child: Text(
-                                        snapshot.data!.hits![index].recipe!.label.toString(),
+                                        snapshot
+                                            .data!.hits![index].recipe!.label
+                                            .toString(),
                                         style: TextStyle(
-                                          color: Colors.white,fontSize: 20,
+                                          color: Colors.white,
+                                          fontSize: 20,
                                         ),
                                       ),
-                                    ),),
-
-
-
-                              ],
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10),
+                                        ),
+                                      ),
+                                      height: 50,
+                                      width: 100,
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.local_fire_department),
+                                            Text(snapshot
+                                                .data!.hits![index].recipe!.calories.toString()),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),*/
+                                ],
+                              ),
                             ),
-
-                          ),
-                        );
-                      });
-                }
-              },
-              )
-
-              ),
-
+                          );
+                        });
+                  }
+                },
+              )),
             ],
           ),
         ],
@@ -170,4 +191,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
