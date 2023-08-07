@@ -122,8 +122,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(snapshot.data!.hits![index].recipe!.image.toString()),
-                                ),
+                                  child: Image.network(snapshot.data!.hits![index].recipe!.image.toString(),
+                                  fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: 200,
+                                  ),
+
+                                  ),
+
+                                  Positioned(
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 5,horizontal: 10,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black54,
+                                      ),
+                                      child: Text(
+                                        snapshot.data!.hits![index].recipe!.label.toString(),
+                                        style: TextStyle(
+                                          color: Colors.white,fontSize: 20,
+                                        ),
+                                      ),
+                                    ),),
+
+
 
                               ],
                             ),
